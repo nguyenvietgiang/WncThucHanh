@@ -1,0 +1,30 @@
+﻿@model List<Hanghoa>
+
+<div class="container mt-5">
+    <h2>Danh sách hàng hóa</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Tên hàng hóa</th>
+                <th>Giá niêm yết</th>
+                <th>Đặc điểm</th>
+                <th>Xuất xứ</th>
+                <th>Ảnh minh họa</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var hanghoa in Model)
+            {
+                <tr>
+                    <td>@hanghoa.Tenhang</td>
+                    <td>@hanghoa.Gianiemyet</td>
+                    <td>@hanghoa.Dacdiem</td>
+                    <td>@hanghoa.Xuatxu</td>
+                    <td><img src="@hanghoa.Anhminhhoa" alt="Ảnh hàng hóa" style="width: 100px; height: 100px;" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-success" asp-controller="Home" asp-action="Create" >Tạo mới</a>
+</div>
+

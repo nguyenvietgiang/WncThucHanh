@@ -1,0 +1,27 @@
+﻿@model List<TblHanghoa>
+
+<h1>Danh sách các mặt hàng</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Tên Hàng hóa</th>
+            <th scope="col">Giá Hàng hóa</th>
+            <th scope="col">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hanghoa in Model)
+        {
+            <tr>
+                <td>@hanghoa.STenhang</td>
+                <td>@hanghoa.FGianiemyet</td>
+                <td><a @Url.Action("RemoveItemFromSession", new { numberToRemove = hanghoa.PkIHanghoaId })><btn class="btn btn-danger">Xóa</btn></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+

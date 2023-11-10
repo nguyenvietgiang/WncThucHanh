@@ -1,0 +1,52 @@
+﻿@model MVC05.Models.TblHanghoa
+
+<h2>Tạo mới sản phẩm</h2>
+
+@{
+    ViewData["Title"] = "Create";
+    @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers 
+    @addTagHelper *, AuthoringTagHelpers
+}
+
+<form asp-action="Create" method="post" enctype="multipart/form-data" class="needs-validation" novalidate >
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="mb-3">
+        <label>Tên sản phẩm</label>
+        <input asp-for="STenhang" class="form-control" />
+        <span asp-validation-for="STenhang"></span>
+    </div>
+    <div class="mb-3">
+        <label>Giá niêm yết</label>
+        <input asp-for="FGianiemyet" class="form-control" />
+        <span asp-validation-for="FGianiemyet"></span>
+    </div>
+    <div class="mb-3">
+       <label>Đặc điểm</label>
+        <input asp-for="SDacdiem" class="form-control" />
+        <span asp-validation-for="SDacdiem"></span>
+    </div>
+    <div class="mb-3">
+        <label>Xuất xứ</label>
+        <input asp-for="SXuatxu" class="form-control" />
+        <span asp-validation-for="SXuatxu"></span>
+    </div>
+    <div class="mb-3">
+        <label>Ảnh minh họa</label>
+       <input type="file" name="ImageFile" class="form-control" />
+       @if (ViewBag.ErrorMessage != null)
+        {
+    <span class="text text-danger">@ViewBag.ErrorMessage</span>
+          }
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

@@ -1,0 +1,12 @@
+@model ProductModel
+
+<h1>Product Details</h1>
+
+<div class="card">
+    <img src="~/img/product.jpg" alt="@Model.ProductName" class="card-img-top" style="height: 500px; width: 300px;" />
+    <div class="card-body">
+        <h5 class="card-title">@Model.ProductName</h5>
+        <p class="card-text">Product ID: @Model.ProductID</p>
+        <p class="card-text">Price: @Model.ProductPrice</p>
+    </div>
+</div>

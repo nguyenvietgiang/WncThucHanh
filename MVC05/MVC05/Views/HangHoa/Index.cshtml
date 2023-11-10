@@ -1,0 +1,81 @@
+﻿<h4>Danh sách hàng hóa</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ảnh</th>
+            <th>Hàng hóa</th>
+            <th>Xuất sứ</th>
+            <th>Giá</th>
+            <th>Xóa</th>
+        </tr>
+    </thead>
+    <tbody id="hanghoa-list"></tbody>
+</table>
+<a class="btn btn-success" asp-controller="Home" asp-action="Create">Tạo mới</a>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            function getHangHoa() {
+                $.ajax({
+                    url: 'https://localhost:7085/HangHoa/Getall',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        // Xóa các hàng hiện tại trong bảng trước khi thêm dữ liệu mới
+                        $('#hanghoa-list').empty();
+                        // Hiển thị dữ liệu hàng hóa
+                        displayHangHoa(data);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function displayHangHoa(hanghoaList) {
+                var hanghoaTable = $('#hanghoa-list');
+                hanghoaList.forEach(function (hanghoa) {
+                    var hanghoaHtml = '<tr>';
+                    hanghoaHtml += '<td><img src="' + hanghoa.sAnhminhhoa + '" alt="Hình ảnh" style="width: 100px; height: 100px;"></td>';
+                    hanghoaHtml += '<td>' + hanghoa.sTenhang + '</td>';
+                    hanghoaHtml += '<td>' + hanghoa.sXuatxu + '</td>';
+                    hanghoaHtml += '<td>' + hanghoa.fGianiemyet + '</td>';
+                    hanghoaHtml += '<td><button class="btn btn-danger delete-subscriber" data-id="' + hanghoa.pkIHanghoaId + '">Xóa</button></td>';
+                    hanghoaHtml += '</tr>';
+                    hanghoaTable.append(hanghoaHtml);
+                });
+            }
+
+            // Gọi hàm để lấy dữ liệu khi trang tải
+            getHangHoa();
+
+            // Sự kiện xóa
+            $(document).on('click', '.delete-subscriber', function () {
+                var subscriberId = $(this).data('id');
+
+                // Hiển thị hộp thoại cảnh báo khi ấn nút xóa
+                if (confirm('Bạn có chắc chắn muốn xóa?')) {
+                    $.ajax({
+                        url: 'https://localhost:7085/HangHoa/Delete?id=' + subscriberId,
+                        type: 'DELETE',
+                        success: function (data) {
+                            // Xóa hàng hóa khỏi danh sách khi xóa thành công
+                            removeHangHoaFromList(subscriberId);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                }
+            });
+
+            function removeHangHoaFromList(subscriberId) {
+                $('#hanghoa-list').find('.delete-subscriber[data-id="' + subscriberId + '"]').closest('tr').remove();
+            }
+        });
+    </script>
+}
+
+
+
+

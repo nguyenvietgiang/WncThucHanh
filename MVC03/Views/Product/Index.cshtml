@@ -1,0 +1,23 @@
+@model List<ProductModel>
+
+<h1>Product List</h1>
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card" style="width: 18rem;">
+                <p class="priceRight">@product.ProductPrice</p>
+               <a href="@Url.Action("ProductDetail","Product", new { id = product.ProductID })">
+                    <img class="card-img-top" src="~/img/product.jpg" alt="Product Image">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">@product.ProductName</h5>
+                    <p class="card-text">Price: @product.Description</p>
+                    <a href="#" class="btn btn-primary">Add To Card</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
